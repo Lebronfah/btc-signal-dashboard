@@ -34,7 +34,79 @@ main{max-width:1450px}
 .foot{border-top:1px solid #263745;margin-top:34px;padding-top:18px;line-height:1.7}
 @media(max-width:850px){.topnav{gap:18px;overflow-x:auto;scrollbar-width:none}.topnav .nav-right{display:none}}
 @media(max-width:540px){.topnav{gap:20px;padding:14px 0;margin-bottom:22px;font-size:11px}.topnav .nav-active:after{bottom:-15px}.brand{font-size:22px}.brand-sub{font-size:8px;margin-left:49px}.source-label{display:block;margin:5px 0 0}.sectionhead h1{letter-spacing:-.8px}}
-</style></head><body><main><header class="top"><div><div class="brand"><b class="pulsemark">⌁</b> PULSE <span class="brand-divider"></span><span class="brand-unit">MARKETS</span></div><div class="small brand-sub">DIGITAL ASSET INTELLIGENCE <span class="brand-dot">•</span> INDEPENDENT RESEARCH</div></div><div class="status"><span class="dot" id="dot"></span><span id="connection">Connecting…</span> · <span id="clock">--:--:-- ET</span></div></header>
+
+/* PULSE private-terminal visual refresh: darker, restrained, premium */
+:root{--bg:#030508;--card:#090d13;--line:#1b2630;--muted:#82909c;--text:#eaf0f4;--green:#29cda8;--red:#ed6b7a;--gold:#cba46a}
+html{background:#030508}
+body{background:radial-gradient(ellipse 60% 28% at 50% -13%,#102020 0%,transparent 77%),#030508!important;color:var(--text)}
+body:before{height:1px;background:linear-gradient(90deg,transparent,#26584f 50%,transparent)}
+.top{border-bottom-color:#18242c}
+.topnav{background:#05090e;border-top-color:#18242c;border-bottom-color:#18242c;color:#75858f}
+.card{background:linear-gradient(150deg,#0d141b,#090e14 58%,#080c11)!important;border-color:#1b2931!important;box-shadow:0 14px 48px #0007!important}
+.stat,.subgrid .stat{background:#080e13!important;border-color:#1c2a33!important}
+.marketpill,.status,.tag{background:#0b141a!important;border-color:#22363a!important}
+.btn{background:#0b161d!important;border-color:#263c42!important;color:#d2e0e5}
+.btn.selected{background:#0d2b27!important;border-color:#287d69!important;color:#a2e9d4}
+canvas{background:#070d12!important;border-color:#1b2b34!important}
+.notice{background:#16130e!important;border-color:#493c27!important}
+.tablewrap,th,td{border-color:#1b2931!important}th{background:#090f15!important}
+.foot{border-top-color:#1b2931}
+.brand b.pulsemark{background:linear-gradient(145deg,#36d5ae,#168a78)!important;box-shadow:0 0 0 1px #347d683d!important}
+.brand-sub{display:flex;flex-wrap:wrap;align-items:center;gap:4px;line-height:1.8;color:#8297a1!important}
+.brand-dot{margin:0 5px!important;color:#2ca88e!important}
+.private-access{color:#c8af81;font-weight:800;letter-spacing:.2em;white-space:nowrap}
+.private-access:before{content:'◆';font-size:7px;color:#c8af81;margin-right:7px;vertical-align:2px}
+@media(max-width:520px){.brand-sub{margin-left:0!important;font-size:8px!important;letter-spacing:.13em!important}.brand-dot{margin:0 2px!important}.private-access{letter-spacing:.12em}}
+</style></head><body><!-- Supabase JS CDN; the anon/publishable key is designed to be public. Never paste a service-role key. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+#pulseGate{position:fixed;inset:0;z-index:99999;background:radial-gradient(ellipse at top,#14201e,#050608 65%);color:#f0f0ee;display:flex;align-items:center;justify-content:center;padding:20px;font:14px system-ui}
+#pulseGate .gateCard{width:min(440px,100%);border:1px solid #30332e;border-radius:18px;background:#0c0e10;padding:30px;box-shadow:0 35px 90px #000a}
+#pulseGate h1{font-size:34px;letter-spacing:.15em;margin:0;color:#e8d3a3}#pulseGate h2{font-size:18px;margin:18px 0 6px}#pulseGate p{color:#aaa;font-size:12px;line-height:1.7}
+#pulseGate input,#pulseGate select{display:block;width:100%;margin:9px 0;padding:12px;background:#15191a;color:white;border:1px solid #3b403c;border-radius:8px}
+#pulseGate button{width:100%;margin-top:10px;padding:12px;border-radius:8px;border:0;background:#c8ac73;color:#14120d;font-weight:700;cursor:pointer}
+#pulseGate button.secondary{background:#24282a;color:#ddd;border:1px solid #34393b}
+#pulseGate .message{color:#e8c88a;min-height:20px;overflow-wrap:anywhere}
+#pulseAdmin{border:1px solid #383a35;background:#101314;border-radius:12px;padding:16px;margin:18px 0}#pulseAdmin textarea{width:100%;min-height:115px;background:#080a0b;color:#d5e5da;border:1px solid #343b39;padding:10px}
+body.pulse-locked>main{display:none!important}
+</style>
+<div id="pulseGate"><div class="gateCard"><h1>PULSE</h1><p>INDEPENDENT RESEARCH · PRIVATE ACCESS</p><h2>Invitation-only terminal</h2><p>Sign in or create an account, then redeem your personal invitation code.</p><div id="pulseGateForm"><input id="pulseEmail" type="email" autocomplete="email" placeholder="Email address"><input id="pulsePassword" type="password" autocomplete="current-password" placeholder="Password (at least 6 characters)"><button id="pulseLogin">Sign in</button><button class="secondary" id="pulseSignup">Create account</button></div><div id="pulseRedeemBox" hidden><input id="pulseCode" placeholder="PULSE-... invitation code" autocomplete="off"><button id="pulseRedeem">Redeem invitation</button><button class="secondary" id="pulseSignout">Sign out</button></div><p id="pulseGateMsg" class="message"></p><p>Access expires 7 or 30 days after redemption. Your invitation can only be used once.</p></div></div>
+<script>
+(function(){
+'use strict';
+const SUPABASE_URL='PASTE_YOUR_SUPABASE_PROJECT_URL';
+const SUPABASE_ANON_KEY='PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY';
+const $=id=>document.getElementById(id), say=s=>$('pulseGateMsg').textContent=s;
+document.body.classList.add('pulse-locked');
+if(!window.supabase||SUPABASE_URL.startsWith('PASTE_')||SUPABASE_ANON_KEY.startsWith('PASTE_')){
+ say('Setup required: enter your Supabase URL and publishable key in index.html.');return;
+}
+const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let loggedIn=false;
+async function refresh(){
+ const {data:{session}}=await client.auth.getSession();
+ if(!session){loggedIn=false;$('pulseGateForm').hidden=false;$('pulseRedeemBox').hidden=true;$('pulseGate').hidden=false;document.body.classList.add('pulse-locked');return}
+ loggedIn=true;const {data,error}=await client.rpc('pulse_access');
+ if(error){say(error.message);return}
+ if(data?.active){$('pulseGate').style.display='none';document.body.classList.remove('pulse-locked');if(data.admin)showAdmin();}
+ else{$('pulseGate').style.display='flex';document.body.classList.add('pulse-locked');$('pulseGateForm').hidden=true;$('pulseRedeemBox').hidden=false;say('Signed in. Enter your unique referral code to activate access.');}
+}
+async function credentials(signup){say('Working...');const email=$('pulseEmail').value.trim(),password=$('pulsePassword').value;
+ const {error}=signup?await client.auth.signUp({email,password}):await client.auth.signInWithPassword({email,password});
+ if(error){say(error.message);return}say(signup?'Account created. If email confirmation is enabled, check your inbox and then sign in.':'Signed in.');await refresh();}
+$('pulseLogin').onclick=()=>credentials(false);$('pulseSignup').onclick=()=>credentials(true);
+$('pulseRedeem').onclick=async()=>{say('Checking invitation...');const {error}=await client.rpc('pulse_redeem',{p_code:$('pulseCode').value.trim()});if(error){say(error.message);return}say('Access activated.');await refresh()};
+$('pulseSignout').onclick=async()=>{await client.auth.signOut();location.reload()};
+function showAdmin(){if($('pulseAdmin'))return;const admin=document.createElement('section');admin.id='pulseAdmin';admin.innerHTML='<h2>PULSE · Admin Access</h2><p>Generate one-time codes. Save them now: plaintext codes are never stored or recoverable.</p><select id="pulseDays"><option value="7">7-day access</option><option value="30">30-day access</option></select><select id="pulseCount"><option value="5">5 codes</option><option value="1">1 code</option><option value="10">10 codes</option><option value="25">25 codes</option></select><button id="pulseGenerate">Generate unique codes</button><p id="pulseStats"></p><textarea id="pulseCodes" readonly placeholder="Generated codes appear here once"></textarea><button id="pulseCopy">Copy codes</button><button id="pulseAdminLogout">Sign out</button>';
+ document.querySelector('main').insertBefore(admin,document.querySelector('main').firstChild);
+ $('pulseGenerate').onclick=async()=>{const {data,error}=await client.rpc('pulse_generate',{p_days:+$('pulseDays').value,p_count:+$('pulseCount').value});if(error){$('pulseStats').textContent=error.message;return}$('pulseCodes').value=(data||[]).map(x=>x.code+' — '+x.days+' days').join('\n');stats()};
+ $('pulseCopy').onclick=()=>navigator.clipboard.writeText($('pulseCodes').value);
+ $('pulseAdminLogout').onclick=async()=>{await client.auth.signOut();location.reload()};stats();}
+async function stats(){const {data,error}=await client.rpc('pulse_admin_stats');$('pulseStats').textContent=error?error.message:`Generated: ${data.generated} · Redeemed: ${data.redeemed} · Unused: ${data.unused}`}
+client.auth.onAuthStateChange(()=>setTimeout(refresh,0));refresh().catch(e=>say(e.message));
+})();
+</script>
+<main><header class="top"><div><div class="brand"><b class="pulsemark">⌁</b> PULSE <span class="brand-divider"></span><span class="brand-unit">MARKETS</span></div><div class="small brand-sub">DIGITAL ASSET INTELLIGENCE <span class="brand-dot">•</span> INDEPENDENT RESEARCH <span class="brand-dot">•</span> <span class="private-access">PRIVATE ACCESS</span></div></div><div class="status"><span class="dot" id="dot"></span><span id="connection">Connecting…</span> · <span id="clock">--:--:-- ET</span></div></header>
 <nav class="topnav" aria-label="Terminal sections"><span class="nav-active">Overview</span><span>Market analytics</span><span>Signal intelligence</span><span>Performance</span><span class="nav-right">RESEARCH TERMINAL <span class="version">V 1.0</span></span></nav><div class="sectionhead"><div><div class="eyebrow">PULSE / MARKET INTELLIGENCE <span class="eyebrow-line"></span> BTC—USD</div><h1>Market overview<span class="headline-period">.</span></h1><p>Real-time Bitcoin analytics, quantitative signals and short-horizon market research.</p></div><div class="marketpill"><span class="market-bullet"></span> BTC / USD &nbsp; · &nbsp; SPOT MARKET</div></div><section class="grid"><article class="card"><h2>BTC / USD <span class="source-label">COINBASE EXCHANGE · LIVE SPOT</span></h2><div class="big" id="price">Loading…</div><div class="small" id="lastTick">Awaiting live market data</div><div class="subgrid"><div class="stat"><label>Round countdown</label><strong id="timer">--:--</strong></div><div class="stat"><label>Round-start proxy</label><strong id="start">—</strong></div><div class="stat"><label>Distance to proxy</label><strong id="distance">—</strong></div></div><div class="chartbar"><strong>Live candles</strong><div class="line"><button class="btn selected" data-tf="15">15s</button><button class="btn" data-tf="60">1m</button><button class="btn" data-tf="300">5m</button></div></div><canvas id="chart"></canvas><div class="small" style="margin-top:7px">Green/red candles · gold EMA 9 · blue EMA 21 · volume bars below · prices update as trades arrive</div></article>
 <article class="card"><h2>PULSE SIGNAL <span class="source-label">5-MINUTE OUTLOOK</span></h2><div class="flex"><div class="signal warning" id="direction">UP</div><span class="tag" id="confidence">Waiting for data</span></div><div id="reason" class="small">The model chooses UP or DOWN from live price movement, not Polymarket odds. No live-data prediction is available until the feed connects.</div><div class="meter"><div id="meter"></div></div><div class="flex"><strong id="pup">UP —</strong><strong id="pdown">DOWN —</strong></div><div class="subgrid" style="grid-template-columns:repeat(2,1fr)"><div class="stat"><label>Price data age</label><strong id="age">—</strong></div><div class="stat"><label>Model status</label><strong id="modelStatus">Waiting</strong></div></div><h2>MARKET REFERENCE <span class="source-label">POLYMARKET</span></h2><div class="stat"><label>Polymarket round</label><strong id="roundName" style="font-size:12px;overflow-wrap:anywhere">Looking up…</strong></div><div class="subgrid" style="grid-template-columns:repeat(2,1fr)"><div class="stat"><label>UP market price</label><strong id="marketUp">—</strong></div><div class="stat"><label>DOWN market price</label><strong id="marketDown">—</strong></div></div><div class="stat"><label>Chainlink settlement reference</label><strong id="chainlink">Not connected</strong></div><div class="notice" id="caution">The exact Chainlink 60-second TWAP is not available from this browser-only dashboard. Coinbase round start is a proxy, not Polymarket's official strike. Signals are experimental and cannot be treated as settlement-accurate.</div></article>
 <article class="card full"><h2>TECHNICAL INTELLIGENCE <span class="source-label">MOMENTUM / VOLATILITY</span></h2><div class="indicators"><div class="stat"><label>RSI (14 × 1m)</label><strong id="rsi">—</strong></div><div class="stat"><label>EMA 9 / EMA 21 (1m)</label><strong id="ema">—</strong></div><div class="stat"><label>VWAP (recent 1m)</label><strong id="vwap">—</strong></div><div class="stat"><label>ATR (14 × 1m)</label><strong id="atr">—</strong></div></div><div class="small" style="margin-top:10px" id="diagnostic">Collecting historical candles…</div></article>
