@@ -43,7 +43,17 @@
 .round-room #preview-gate .cta { min-height: 44px; line-height: 1.4; }
 .doc-dashboard .watch-links { margin: 9px 0 0; display: flex; flex-wrap: wrap; gap: 7px 14px; font-size: .82rem; }
 .doc-dashboard .watch-links a { color: var(--mint); }
-.doc-dashboard :is(#chartTitle,#live-comparison) { scroll-margin-top: 18px; }
+.doc-dashboard :is(#market-watch,#chartTitle,#round-tracker,#live-comparison,#track-record) {
+  scroll-margin-top: 18px;
+}
+.doc-dashboard .watch-return {
+  display: inline-block;
+  padding-block: 8px;
+  margin-top: 6px;
+  color: var(--mint);
+  font-size: .84rem;
+}
+.doc-dashboard .tab-scroll-note { display: none; }
 .doc-dashboard .source-guide {
   margin-top: 12px;
   padding: 0 12px;
@@ -98,4 +108,11 @@
   .doc-dashboard .watch-cell { padding: 11px 12px; }
   .doc-dashboard .watch-cell:last-child { grid-column: 1 / -1; }
   .doc-dashboard .table-scroll-note { display: block; }
+  .doc-dashboard .tab-scroll-note {
+    display: block;
+    margin: -4px 0 12px;
+    color: #bdd0c4;
+    font-size: .8rem;
+  }
+  .doc-dashboard .watch-links a { padding: 6px 0; }
 }
