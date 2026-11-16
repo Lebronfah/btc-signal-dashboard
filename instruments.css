@@ -1,6 +1,6 @@
 :root {
-  --chart-green: #0d251a;
-  --chart-recess: #0b1e15;
+  --chart-green: #103526;
+  --chart-recess: #11291e;
 }
 .theme-nav {
   padding-inline: clamp(10px,2vw,23px);
