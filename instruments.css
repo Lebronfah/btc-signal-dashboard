@@ -1,6 +1,18 @@
 :root {
   --chart-plot: #070d12;
   --chart-recess: #11291e;
+  --direction-up: #61e4ad;
+  --direction-down: #ff8795;
+}
+.direction-up,
+.preview-page .read.direction-up,
+.doc-dashboard :is(.doc-lean[data-direction="up"], .signal.up, .signal-value.up, #pup, #marketUp, #comparison-market, #comparison-pulse) {
+  color: var(--direction-up);
+}
+.direction-down,
+.preview-page .read.direction-down,
+.doc-dashboard :is(.doc-lean[data-direction="down"], .signal.down, .signal-value.down, #pdown, #marketDown) {
+  color: var(--direction-down);
 }
 .theme-nav {
   padding-inline: clamp(10px,2vw,23px);
