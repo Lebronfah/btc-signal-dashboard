@@ -1,0 +1,18 @@
+.doc-dashboard {
+  background: radial-gradient(ellipse at 75% 0%, #1b3c30, transparent 700px), #081711;
+}
+.doc-dashboard .theme-nav { margin-bottom: 18px; }
+.doc-dashboard :is(.card, .vip-card, .ai-model, .classroom-lesson) {
+  background: #112820;
+  border-color: #365747;
+}
+.doc-dashboard .stat {
+  background: #10231c;
+  border-color: #35594a;
+}
+.doc-dashboard .doc-guide { margin: 0 0 24px; }
+.doc-dashboard #live-comparison {
+  border-radius: 16px;
+  border-color: #528772;
+}
+.doc-dashboard .page-title { color: #eaf9ef; }
