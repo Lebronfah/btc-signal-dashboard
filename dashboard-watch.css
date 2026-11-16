@@ -1,0 +1,101 @@
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #10261a;
+  background: var(--mint);
+  transform: translateY(calc(-100% - 12px));
+}
+.skip-link:focus { transform: none; }
+.offer-note { font-size: .89rem; font-weight: 650; }
+.hero .offer-note { font-size: .89rem; margin: 12px 0 0; }
+.first-visit-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin: 18px 0 0; }
+.market-page .first-visit-actions a { min-height: 44px; }
+.reading-key {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 10px;
+  margin: 0;
+}
+.reading-key > div {
+  padding: 14px;
+  border: 1px solid #50705c;
+  border-radius: 9px;
+  background: #11271e;
+}
+.reading-key dt { font-size: .9rem; font-weight: 800; }
+.reading-key dd { margin: 6px 0 0; font-size: .88rem; line-height: 1.5; color: var(--muted); }
+.reading-key-caption { margin: 12px 0 0; }
+.first-visit-faq { margin-top: 32px; }
+.first-visit-faq details { border-bottom: 1px solid #54735e; padding: 12px 0; }
+.first-visit-faq summary { cursor: pointer; padding: 8px 0; font-weight: 700; }
+.first-visit-faq details p { margin: 0 0 8px; max-width: 65ch; }
+.round-room #preview-gate {
+  margin: 14px 0 0;
+  padding: 12px;
+  background: #10271ddd;
+}
+.round-room #preview-gate h2 { margin: 0 0 5px; }
+.round-room #preview-gate p:empty { display: none; }
+.round-room #preview-gate .cta { min-height: 44px; line-height: 1.4; }
+.doc-dashboard .watch-links { margin: 9px 0 0; display: flex; flex-wrap: wrap; gap: 7px 14px; font-size: .82rem; }
+.doc-dashboard .watch-links a { color: var(--mint); }
+.doc-dashboard :is(#chartTitle,#live-comparison) { scroll-margin-top: 18px; }
+.doc-dashboard .source-guide {
+  margin-top: 12px;
+  padding: 0 12px;
+  border: 1px solid #476457;
+  border-radius: 8px;
+  background: #11271e;
+  color: #dbe9df;
+}
+.doc-dashboard .source-guide summary { cursor: pointer; padding: 11px 0; font-weight: 700; }
+.doc-dashboard .source-guide p { margin: 0 0 12px; line-height: 1.55; }
+.doc-dashboard .tablewrap:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+.doc-dashboard .table-scroll-note { display: none; color: #c0d3c7; font-size: .82rem; margin: 8px 0; }
+.doc-dashboard .tablewrap caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.doc-dashboard .watch-strip {
+  grid-column: 1 / -1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,.68fr) minmax(0,1.65fr);
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid #62775b;
+  border-radius: 10px;
+  background: #385348;
+}
+.doc-dashboard .watch-cell { min-width: 0; padding: 14px 16px; background: #132820; }
+.doc-dashboard .watch-cell h2 { margin: 0 0 5px; color: #e6e8d6; font-size: .88rem; }
+.doc-dashboard .watch-cell .watch-value { display: block; font-size: clamp(1.55rem, 3vw, 2.25rem); line-height: 1.16; font-weight: 750; }
+.doc-dashboard .watch-cell :is(p,.small) { margin: 6px 0 0; color: #bdcdc1; }
+.doc-dashboard .watch-cell .doc-lead { align-items: flex-start; margin: 0; }
+.doc-dashboard .watch-cell .doc-lead img { inline-size: 56px; block-size: 56px; object-fit: contain; }
+.doc-dashboard .watch-cell #comparison-status { color: #a9c5b5; }
+.doc-dashboard .watch-cell .timer-urgent { color: #f8d899; }
+
+@media (max-width: 530px) {
+  .market-page .first-visit-hero { padding: 19px 16px; gap: 14px; margin-block: 16px; }
+  .market-page .first-visit-hero :is(h1,.scene-title) { font-size: clamp(2.25rem, 9vw, 3rem); margin-bottom: 12px; }
+  .market-page .first-visit-hero .scene-character { width: min(44%, 145px); }
+  .first-visit-hero .actions { margin-top: 16px; }
+  .reading-key { grid-template-columns: 1fr; }
+  .reading-key > div { display: grid; grid-template-columns: 5.8rem 1fr; align-items: baseline; gap: 7px; }
+  .reading-key dd { margin: 0; }
+  .doc-dashboard .topnav .nav-tab { min-height: 44px; }
+  .doc-dashboard .watch-strip { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .doc-dashboard .watch-cell { padding: 11px 12px; }
+  .doc-dashboard .watch-cell:last-child { grid-column: 1 / -1; }
+  .doc-dashboard .table-scroll-note { display: block; }
+}
